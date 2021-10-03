@@ -1,7 +1,9 @@
+//declaring variables and using moment js to display current date on screen
 var pEl = $('#currentDay');
 var timeblockEl = $('.timeblock');
 pEl.text(moment().format(' dddd, MMMM Do YYYY'));
-var idClicked;
+
+//declaring variables for all the DOM elements
 var textarea1 = $('#textarea1');
 var textarea2 = $('#textarea2');
 var textarea3 = $('#textarea3');
@@ -11,27 +13,34 @@ var textarea6 = $('#textarea6');
 var textarea7 = $('#textarea7');
 var textarea8 = $('#textarea8');
 var textarea9 = $('#textarea9');
+
+//getting current date and hours and assigning to variables
 var date = new Date();
 var getHours = date.getHours();
 
+//grabbing rows and hour classes to color code time block
 var row = $('.row');
 var hour = $('.hour');
 var hourValue = $('.hour').attr('value');
-function colorCodeTimeBlock() {
-    if (hourValue < getHours) {
 
+//function to Colorcodetimeblock
+function colorCodeTimeBlock() 
+{
+    if (hourValue < getHours) 
+    {
         row.attr('class', 'past');
-
     }
-    else if (hourValue > getHours) {
+    else if (hourValue > getHours) 
+    {
         row.attr('class', 'future');
     }
-    else {
+    else 
+    {
         row.attr('class', 'present');
     }
 }
 function saveTextAreaEvents() {
-    // Save related form data as an object
+    // save textarea values as object
     var textAreaValue = {
         textarea1: textarea1.val(),
         textarea2: textarea2.val(),
@@ -47,7 +56,7 @@ function saveTextAreaEvents() {
     // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
     localStorage.setItem("textAreaValue", JSON.stringify(textAreaValue));
 }
-
+//function to render the textareaevents.
 function renderTextAreaEvents() {
     // Use JSON.parse() to convert text to JavaScript object
     var newtextAreaValue = JSON.parse(localStorage.getItem("textAreaValue"));
@@ -63,7 +72,7 @@ function renderTextAreaEvents() {
 
 }
 
-
+//event listener on click for timeblock
 $(".timeblock").click(function (event) {
 
     saveTextAreaEvents();
@@ -71,7 +80,7 @@ $(".timeblock").click(function (event) {
 
 });
 function init() {
-    // When the init function is executed, the code inside renderLastGrade function will also execute
+    // When the init function is executed, the code inside renderTextAreaEvent function will also execute.
     colorCodeTimeBlock();
     renderTextAreaEvents();
 }
